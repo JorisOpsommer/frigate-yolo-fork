@@ -5,9 +5,6 @@ __pycache__
 debug
 .vscode/*
 !.vscode/launch.json
-config/*
-!config/*.example
-models
 *.mp4
 *.db
 *.csv
