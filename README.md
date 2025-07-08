@@ -21,3 +21,8 @@ npm run dev
 
 edgetpu tflite compiler, in wsl:
 edgetpu_compiler mobilenet_ssd_int8.tflite
+
+# lxc community scripts original:
+
+https://github.com/community-scripts/ProxmoxVE/blob/main/ct/frigate.sh
+https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/install/frigate-install.sh
