@@ -1236,16 +1236,26 @@ EOF'
     else
       msg_warn "Skipping timezone setup – zone '$tz' not found in container"
     fi
+    msg_info "Customizing LXC Container: installing base packages"
 
-    pct exec "$CTID" -- bash -c "apt-get update >/dev/null && apt-get install -y sudo curl mc gnupg2 >/dev/null"
+    pct exec "$CTID" -- bash -c '
+    set -euxo pipefail           # fail on any error, show every command
+    export DEBIAN_FRONTEND=noninteractive
+
+    echo ">>> apt-get update"
+    apt-get update               # no more >/dev/null
+
+    echo ">>> apt-get install -y sudo curl mc gnupg2"
+    apt-get install -y sudo curl mc gnupg2
+
+    echo ">>> completed base-package install"
+  '
+
+  msg_ok "Base packages installed in LXC"
   fi
   msg_ok "Customized LXC Container"
 
-  msg_info "Installing Frigate inside LXC (verbose)"
-  lxc-attach -n "$CTID" -- bash -x -c "\
-  export STD=\"\";                              # disable silent()
-  $(curl -fsSL \
-     https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/main/lxc/install.sh)"
+  lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/main/lxc/install.sh)"
 }
 
 # This function sets the description of the container.
