@@ -1241,7 +1241,11 @@ EOF'
   fi
   msg_ok "Customized LXC Container"
 
-  lxc-attach -n "$CTID" -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/main/lxc/install.sh)"
+  msg_info "Installing Frigate inside LXC (verbose)"
+  lxc-attach -n "$CTID" -- bash -x -c "\
+  export STD=\"\";                              # disable silent()
+  $(curl -fsSL \
+     https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/main/lxc/install.sh)"
 }
 
 # This function sets the description of the container.
