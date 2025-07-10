@@ -1025,6 +1025,17 @@ start() {
 
 # This function collects user settings and integrates all the collected information.
 build_container() {
+  export STD=""                                 # disable “quiet” ($STD) redirects
+  export PS4='+ $(date "+%F %T")\011 '          # timestamp each +trace line
+  set -o xtrace                                 # enable bash -x tracing
+
+  # helper timestamp + msg_* wrappers
+  timestamp(){ date "+%F %T"; }
+  msg_info(){ printf "%s [ INFO ]  %s\n" "$(timestamp)" "$*"; }
+  msg_ok(){   printf "%s [  OK  ]  %s\n" "$(timestamp)" "$*"; }
+  msg_warn(){ printf "%s [ WARN ]  %s\n" "$(timestamp)" "$*"; }
+  msg_error(){ printf "%s [ERROR ]  %s\n" \
+                "$(timestamp)" "$*" >&2; }
   #  if [ "$VERBOSE" == "yes" ]; then set -x; fi
 
   NET_STRING="-net0 name=eth0,bridge=$BRG$MAC,ip=$NET$GATE$VLAN$MTU"

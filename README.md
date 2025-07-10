@@ -1,7 +1,6 @@
 # create lxc
 
 bash -c "$(wget -qLO - https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/refs/heads/main/lxc/init.sh)"
-bash -c "$(wget -qLO - https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/41109ad7accfdbaf24e7355b401c29eea5ca6080/lxc/init.sh)"
 
 # logs
 

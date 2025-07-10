@@ -6,6 +6,21 @@
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://frigate.video/
 
+export STD=""                                 # disable “quiet” redirects
+export PS4='+ $(date "+%F %T")\011 '          # timestamp each +trace line
+set -o xtrace                                 # enable bash -x tracing
+
+timestamp(){ date "+%F %T"; }                 # helper for timestamps
+msg_info(){ printf "%s [ INFO ] %s\n" \
+  "$(timestamp)" "$*"; }
+msg_ok(){   printf "%s [  OK  ] %s\n" \
+  "$(timestamp)" "$*"; }
+msg_warn(){ printf "%s [ WARN ] %s\n" \
+  "$(timestamp)" "$*"; }
+msg_error(){ printf "%s [ERROR ] %s\n" \
+  "$(timestamp)" "$*" >&2; }
+
+  
 source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
 verb_ip6
