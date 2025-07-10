@@ -1,6 +1,7 @@
 # create lxc
 
 bash -c "$(wget -qLO - https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/refs/heads/main/lxc/init.sh)"
+bash -c "$(wget -qLO - https://raw.githubusercontent.com/JorisOpsommer/frigate-yolo-fork/41109ad7accfdbaf24e7355b401c29eea5ca6080/lxc/init.sh)"
 
 # logs
 
@@ -25,4 +26,5 @@ edgetpu_compiler mobilenet_ssd_int8.tflite
 # lxc community scripts original:
 
 https://github.com/community-scripts/ProxmoxVE/blob/main/ct/frigate.sh
-https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/install/frigate-install.sh
+https://github.com/community-scripts/ProxmoxVE/blob/b9ac02e74f23863e5d3fbddc8749a51207f826ae/install/frigate-install.sh
+https://github.com/community-scripts/ProxmoxVE/blob/b9ac02e74f23863e5d3fbddc8749a51207f826ae/misc/build.func
