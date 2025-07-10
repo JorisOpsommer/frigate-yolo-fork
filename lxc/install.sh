@@ -59,6 +59,7 @@ msg_ok "Set Up Hardware Acceleration"
 #RELEASE=$(curl -fsSL https://api.github.com/repos/blakeblackshear/frigate/releases/latest | jq -r '.tag_name')
 msg_ok "Stop spinner to prevent segmentation fault"
 msg_info "Installing Frigate v0.14.1 (Perseverance)"
+msg_info "Stop spinner only if it exists"
 if [ -n "${SPINNER_PID-}" ] && ps -p "${SPINNER_PID-}" >/dev/null; then
   kill "${SPINNER_PID-}" >/dev/null
 fi
@@ -68,6 +69,9 @@ curl -fsSL "https://github.com/JorisOpsommer/frigate-yolo-fork/archive/refs/head
 tar -xzf frigate.tar.gz -C /opt/frigate --strip-components 1
 rm -rf frigate.tar.gz
 cd /opt/frigate
+msg_info "install wheels"
+$STD pip3 install --upgrade pip setuptools wheel
+msg_info "install requirements"
 $STD pip3 wheel --wheel-dir=/wheels -r /opt/frigate/docker/main/requirements-wheels.txt
 cp -a /opt/frigate/docker/main/rootfs/. /
 export TARGETARCH="amd64"
