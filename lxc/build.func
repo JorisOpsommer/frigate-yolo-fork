@@ -1025,17 +1025,6 @@ start() {
 
 # This function collects user settings and integrates all the collected information.
 build_container() {
-  export STD=""                                 # disable “quiet” ($STD) redirects
-  export PS4='+ $(date "+%F %T")\011 '          # timestamp each +trace line
-  set -o xtrace                                 # enable bash -x tracing
-
-  # helper timestamp + msg_* wrappers
-  timestamp(){ date "+%F %T"; }
-  msg_info(){ printf "%s [ INFO ]  %s\n" "$(timestamp)" "$*"; }
-  msg_ok(){   printf "%s [  OK  ]  %s\n" "$(timestamp)" "$*"; }
-  msg_warn(){ printf "%s [ WARN ]  %s\n" "$(timestamp)" "$*"; }
-  msg_error(){ printf "%s [ERROR ]  %s\n" \
-                "$(timestamp)" "$*" >&2; }
   #  if [ "$VERBOSE" == "yes" ]; then set -x; fi
 
   NET_STRING="-net0 name=eth0,bridge=$BRG$MAC,ip=$NET$GATE$VLAN$MTU"
@@ -1236,23 +1225,8 @@ EOF'
     else
       msg_warn "Skipping timezone setup – zone '$tz' not found in container"
     fi
-    msg_info "Customizing LXC Container: installing base packages"
-    pct exec "$CTID" -- bash -c '
-      set -euxo pipefail
-      export DEBIAN_FRONTEND=noninteractive
 
-      echo ">>> apt-get update"
-      apt-get update
-
-      echo ">>> apt-get install -y sudo curl mc gnupg2"
-      apt-get install -y sudo curl mc gnupg2
-
-      echo ">>> Base packages installed"
-    '
-    msg_ok "Base packages installed in LXC"
-  fi
-
-  msg_ok "Base packages installed in LXC"
+    pct exec "$CTID" -- bash -c "apt-get update >/dev/null && apt-get install -y sudo curl mc gnupg2 >/dev/null"
   fi
   msg_ok "Customized LXC Container"
 
