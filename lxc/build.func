@@ -1237,19 +1237,20 @@ EOF'
       msg_warn "Skipping timezone setup – zone '$tz' not found in container"
     fi
     msg_info "Customizing LXC Container: installing base packages"
-
     pct exec "$CTID" -- bash -c '
-    set -euxo pipefail           # fail on any error, show every command
-    export DEBIAN_FRONTEND=noninteractive
+      set -euxo pipefail
+      export DEBIAN_FRONTEND=noninteractive
 
-    echo ">>> apt-get update"
-    apt-get update               # no more >/dev/null
+      echo ">>> apt-get update"
+      apt-get update
 
-    echo ">>> apt-get install -y sudo curl mc gnupg2"
-    apt-get install -y sudo curl mc gnupg2
+      echo ">>> apt-get install -y sudo curl mc gnupg2"
+      apt-get install -y sudo curl mc gnupg2
 
-    echo ">>> completed base-package install"
-  '
+      echo ">>> Base packages installed"
+    '
+    msg_ok "Base packages installed in LXC"
+  fi
 
   msg_ok "Base packages installed in LXC"
   fi
