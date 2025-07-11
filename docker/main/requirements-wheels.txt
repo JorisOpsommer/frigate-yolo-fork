@@ -39,7 +39,7 @@ titlecase == 2.4.*
 numpy == 1.26.*
 opencv-python-headless == 4.11.0.*
 opencv-contrib-python == 4.11.0.*
-scipy == 1.14.*
+scipy==1.13.*
 # OpenVino & ONNX
 openvino == 2024.4.*
 onnxruntime-openvino == 1.20.* ; platform_machine == 'x86_64'
