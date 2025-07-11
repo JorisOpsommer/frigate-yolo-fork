@@ -1,3 +1,6 @@
+tensorflow==2.10.0; platform_machine=="x86_64"
+PyYAML==5.3.1
+protobuf==3.19.6
 aiofiles == 24.1.*
 click == 8.1.*
 # FastAPI
@@ -69,5 +72,3 @@ verboselogs==1.7.*
 virtualenv==20.17.*
 prometheus-client == 0.21.*
 # TFLite
-tflite_runtime @ https://github.com/frigate-nvr/TFlite-builds/releases/download/v2.17.1/tflite_runtime-2.17.1-cp311-cp311-linux_x86_64.whl; platform_machine == 'x86_64'
-tflite_runtime @ https://github.com/feranick/TFlite-builds/releases/download/v2.17.1/tflite_runtime-2.17.1-cp311-cp311-linux_aarch64.whl; platform_machine == 'aarch64'
