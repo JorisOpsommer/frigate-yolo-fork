@@ -12,7 +12,7 @@ apt-get -qq install --no-install-recommends -y \
     lbzip2 \
     procps vainfo \
     unzip locales tzdata libxml2 xz-utils \
-    python3.11 \
+    python3.10 \
     curl \
     lsof \
     jq \
@@ -21,7 +21,7 @@ apt-get -qq install --no-install-recommends -y \
     libglib2.0-0 \
     libusb-1.0.0
 
-update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
 
 mkdir -p -m 600 /root/.gnupg
 
